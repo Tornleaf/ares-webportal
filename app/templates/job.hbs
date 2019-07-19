@@ -27,7 +27,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
+                <span class="btn btn-default" href="#">Job Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
                 <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
                 {{#if model.job.is_approval_job}}
@@ -43,6 +43,35 @@
 
   <tr>
     <td>
+      <label>Other Participants:</label>
+    </td>
+    <td>
+      {{#each model.job.participants as |participant|}}
+        {{char-icon-inline char=participant}}
+      {{/each}}
+    </td>
+    <td>
+       <ul class="nav">
+         <li>
+           <a href="#">
+        {{#if editParticipants}}
+         {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+          {{char.name}}
+        {{/power-select-multiple}}
+        <button class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</button>
+        <button class="btn btn-primary" {{action 'saveParticipants'}}>Save</button>
+      {{else}}
+        <button class="btn btn-default" {{action (mut editParticipants) true}}>Edit</button>
+      {{/if}}
+         </a>
+         </li>
+      </ul>
+      
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
      <label>Assigned To:</label> 
     </td>
     <td>
@@ -56,7 +85,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-            <span class="btn btn-default" href="#" role="button">Assign <span class="caret"></span></span> </a>
+            <span class="btn btn-default" href="#">Assign <span class="caret"></span></span> </a>
             <ul class="dropdown-menu">
             {{#each model.job.job_admins as |staff| }}
               <li><a href="#" {{action 'assignJob' staff}}>{{staff.name}}</a></li>
@@ -83,7 +112,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              <span class="btn btn-default" href="#" role="button">Change Status <span class="caret"></span></span> </a>
+              <span class="btn btn-default" href="#">Change Status <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#each model.options.status_values as |status| }}
                 <li><a href="#" {{action 'changeData' 'status' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
@@ -110,7 +139,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              <span class="btn btn-default" href="#" role="button">Change Category <span class="caret"></span></span> </a>
+              <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#each model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeData' 'category' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
@@ -141,11 +170,11 @@
 </table>
 
 
-<hr/>
+<hr>
 
     {{{ansi-format text=model.job.description}}}
 
-<hr/>
+<hr>
 
 {{#each model.job.replies as |r|}}
  <div>
@@ -165,7 +194,7 @@
          {{{ansi-format text=r.message}}}
          
      
-     <hr/>
+     <hr>
   </div>
 {{/each}}
 
@@ -187,7 +216,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
+              <span class="btn btn-default" href="#">Job Menu <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
               {{#if model.job.is_approval_job}}
