@@ -77,6 +77,7 @@
                     {{markdown-editor text=pose.raw_pose}}
                                         
                     <div class="pull-right">
+                    {{live-scene-txt scenePose=scenePose scene=scene}}
                     <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
                     <button class="btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
