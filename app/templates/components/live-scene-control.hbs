@@ -77,7 +77,6 @@
                     {{markdown-editor text=pose.raw_pose}}
                                         
                     <div class="pull-right">
-                    {{live-scene-txt scenePose=scenePose scene=scene}}
                     <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
                     <button class="btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
@@ -148,6 +147,8 @@
                 
                 <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
                 <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
+                {{live-scene-txt scenePose=scenePose scene=scene}}
+                
                 {{/if}}
                 
                 {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
